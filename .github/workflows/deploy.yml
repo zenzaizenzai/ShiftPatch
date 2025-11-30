@@ -1,0 +1,34 @@
+# ファイル名: .github/workflows/deploy.yml
+
+name: Deploy Vite Project to GitHub Pages # ワークフロー名
+
+on:
+  push:
+    branches:
+      - main # mainブランチへのプッシュで実行
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout # コードをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js # Node.js環境のセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 使用するNodeのバージョンを指定
+
+      - name: Install dependencies # 依存関係のインストール (npm install)
+        run: npm install
+
+      - name: Build project # Viteビルドの実行
+        run: npm run build
+
+      - name: Deploy to GitHub Pages # GitHub Pagesへのデプロイ
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # ビルド成果物のあるフォルダを指定 (dist)
+          cname: '' # カスタムドメインを使用しない場合
