@@ -8,34 +8,52 @@ on:
       - main # mainブランチへのプッシュで実行
   workflow_dispatch:
 
-# 🚀 追記箇所 1: ワークフロー全体に権限を付与 🚀
+# 🚀 権限設定（そのまま維持します。これが exit code 128 の解決に不可欠です）🚀
 permissions:
   contents: read
   pages: write # Pagesへの書き込み権限
-  id-token: write
+  id-token: write # デプロイメント認証に必要な権限
 
 jobs:
+  # 1. ビルドと成果物のアップロードを行うジョブ
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout # コードをチェックアウト
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js # Node.js環境のセットアップ
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # 使用するNodeのバージョンを指定
+          node-version: '20'
 
-      - name: Install dependencies # 依存関係のインストール (npm install)
+      - name: Install dependencies
         run: npm install
 
-      - name: Build project # Viteビルドの実行
+      - name: Build project
         run: npm run build
 
-      - name: Deploy to GitHub Pages # GitHub Pagesへのデプロイ
-        uses: peaceiris/actions-gh-pages@v3
+      # 💡 追記箇所 1: ビルド成果物をアップロード 💡
+      # このステップがデプロイされるファイルを用意します
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          # 🚀 追記箇所 2: トークンの明示 (既に記載済みですが、そのまま維持) 🚀
-          github_token: ${{ secrets.GITHUB_TOKEN }} 
-          publish_dir: ./dist # ビルド成果物のあるフォルダを指定 (dist)
-          cname: '' # カスタムドメインを使用しない場合
+          path: ./dist # ビルド成果物のあるフォルダを指定
+
+  # 2. アップロードされた成果物を使ってデプロイを行うジョブ
+  deploy:
+    # `build`ジョブが成功した後に実行
+    needs: build 
+    
+    # 💡 追記箇所 2: デプロイメント環境の設定 💡
+    # GitHub Pagesのデプロイメント環境をセットアップ
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      # 💡 追記箇所 3: 公式のデプロイアクションを使用 💡
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # GitHub公式のデプロイアクションを使用
