@@ -8,6 +8,12 @@ on:
       - main # mainブランチへのプッシュで実行
   workflow_dispatch:
 
+# 🚀 追記箇所 1: ワークフロー全体に権限を付与 🚀
+permissions:
+  contents: read
+  pages: write # Pagesへの書き込み権限
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,6 +35,7 @@ jobs:
       - name: Deploy to GitHub Pages # GitHub Pagesへのデプロイ
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 🚀 追記箇所 2: トークンの明示 (既に記載済みですが、そのまま維持) 🚀
+          github_token: ${{ secrets.GITHUB_TOKEN }} 
           publish_dir: ./dist # ビルド成果物のあるフォルダを指定 (dist)
           cname: '' # カスタムドメインを使用しない場合
