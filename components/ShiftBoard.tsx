@@ -277,7 +277,7 @@ export const ShiftBoard: React.FC<Props> = ({ departments, staffList, shifts, se
   return (
     <div className="flex h-full flex-col md:flex-row overflow-hidden relative">
       {/* --- Sidebar (Standby) --- */}
-      <div className="w-full md:w-64 bg-stone-100 border-r border-stone-200 flex flex-col z-20 shadow-lg md:shadow-none h-48 md:h-auto shrink-0">
+      <div className="w-full md:w-64 bg-stone-100 border-r border-stone-200 flex flex-col z-20 shadow-lg md:shadow-none h-64 md:h-auto shrink-0">
         <div className="p-3 bg-stone-200 border-b border-stone-300 flex justify-between items-center">
           <h2 className="font-bold text-stone-700">待機中スタッフ</h2>
           <span className="bg-stone-600 text-white text-xs px-2 py-1 rounded-full">{unassignedStaff.length}</span>

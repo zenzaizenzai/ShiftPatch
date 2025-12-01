@@ -36,6 +36,7 @@
         color: #292524;
         overscroll-behavior-y: none;
         margin: 0;
+        height: 100dvh; /* Force correct viewport height on mobile */
       }
       /* Custom scrollbar for the scroll feel */
       ::-webkit-scrollbar {
@@ -64,14 +65,8 @@
 }
 </script>
 </head>
-  <body class="bg-stone-50 text-stone-800 h-screen w-screen overflow-hidden">
+  <body class="bg-stone-50 text-stone-800 w-screen overflow-hidden" style="height: 100dvh">
     <div id="root" class="h-full w-full"></div>
     <script type="module" src="./index.tsx"></script>
-
-    <body class="bg-stone-50 text-stone-800 h-screen w-screen overflow-hidden fixed">
-    <div id="root" class="h-full w-full"></div>
-    <script type="module" src="./index.tsx"></script>
-  </body>
-  
   </body>
 </html>

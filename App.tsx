@@ -106,13 +106,13 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="h-screen w-screen bg-stone-50 flex flex-col font-sans text-stone-800">
+    <div className="w-screen bg-stone-50 flex flex-col font-sans text-stone-800" style={{ height: '100dvh' }}>
       <div className="flex-1 overflow-hidden relative">
         {renderContent()}
       </div>
 
-      <nav className="bg-white border-t border-stone-200 pb-safe z-50">
-        <div className="flex justify-around items-center h-16 max-w-2xl mx-auto">
+      <nav className="bg-white border-t border-stone-200 z-50 shrink-0">
+        <div className="flex justify-around items-center h-16 max-w-2xl mx-auto pb-safe">
           <NavButton active={view === 'SHIFT'} onClick={() => setView('SHIFT')} icon={<Scroll size={20} />} label="シフト巻物" />
           <NavButton active={view === 'STAFF'} onClick={() => setView('STAFF')} icon={<Users size={20} />} label="バイト管理" />
           <NavButton active={view === 'DEPT'} onClick={() => setView('DEPT')} icon={<Layout size={20} />} label="部署エリア" />
