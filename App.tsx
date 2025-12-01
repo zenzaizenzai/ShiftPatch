@@ -94,7 +94,7 @@ const App: React.FC = () => {
         return <StaffSettings staffList={staffList} setStaffList={handleUpdateStaffList} />;
       case 'REQ':
         return (
-           <div className="p-8 text-center text-stone-500">
+           <div className="p-8 text-center text-stone-500 h-full overflow-y-auto">
              <h2 className="text-2xl font-bold mb-4">必要人員設定</h2>
              <p>この機能は現在、シフトボード上の背景色ロジック（赤・青・緑）として簡易実装されています。</p>
              <p className="mt-2 text-sm">※ 完全な編集画面は今後のアップデートで追加予定</p>

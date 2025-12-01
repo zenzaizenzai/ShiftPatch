@@ -66,7 +66,7 @@ export const StaffSettings: React.FC<Props> = ({ staffList, setStaffList }) => {
   };
 
   return (
-    <div className="p-4 max-w-4xl mx-auto pb-20">
+    <div className="p-4 max-w-4xl mx-auto pb-40 h-full overflow-y-auto">
       <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-stone-700">
         <span>👥</span> バイト属性（パッチ）管理
       </h2>

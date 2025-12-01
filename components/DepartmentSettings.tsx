@@ -71,7 +71,7 @@ export const DepartmentSettings: React.FC<Props> = ({ departments, setDepartment
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto pb-24">
+    <div className="p-4 max-w-2xl mx-auto pb-40 h-full overflow-y-auto">
       <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-stone-700">
         <span>🏢</span> 部署エリア設定
       </h2>
